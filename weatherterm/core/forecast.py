@@ -31,4 +31,34 @@ class Forecast:
         self._forecast_date=forecast_date.strftime("%a %b %d")
 
     @property
-                    
+    def current_temp(self):
+        return self._current_temp
+
+    @property
+    def humidity(self):
+        return self._humidity
+
+    @property
+    def wind(self):
+        return self._wind
+
+    @property
+    def description(self):
+        return self._description
+
+    def __str__(self):
+        temperature=None
+        offset=' '*4                
+        if self._forecast_type==ForecastType.TODAY:
+            temperature=(f'{offset}{self._current_temp}\xb0\n'
+                        f'{offset}High {self._high_temp}\xb0 /'
+                        f'Low {self._low_temp}\xb0 ')            
+
+        else:
+            temperature = (f'{offset}High {self._high_temp}\xb0 / '
+                            f'Low {self._low_temp}\xb0 ')
+        return(f'>> {self.forecast_date}\n'
+                f'{temperature}'
+                f'({self._description})\n'
+                f'{offset}Wind: '
+                f'{self._wind} / Humidity: {self._humidity}\n')                
